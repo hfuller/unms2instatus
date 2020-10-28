@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euf
+
+grep -E 'has (dis)?connected (to|from) UNMS' | while read LINE; do
+	echo "$LINE" >> /tmp/unms2instatus.debug
+
+	BOX=$(echo "$LINE" | awk '{print $1}')
+
+	if (echo "$LINE" | grep " connected to "); then
+		PAYLOAD="result=pass"
+	else
+		PAYLOAD="result=fail"
+	fi
+
+	#Now we dispatch updates to ALL components that are mapped to this box.
+	grep -E "^$BOX " /usr/local/etc/unms2instatus.map | while read OTHERLINE; do
+		URL="$(echo "$OTHERLINE" | awk '{print $2}')"
+
+		echo curl -X POST "$URL" -d "$PAYLOAD" >> /tmp/unms2instatus.debug
+		curl -X POST "$URL" -d "$PAYLOAD"
+	done
+done
+

@@ -1,0 +1,4 @@
+TestDevice https://api.instatus.com/v1/integrations/runscope/exampledotcom-test-component-blahblah
+Main1 https://api.instatus.com/v1/integrations/runscope/exampledotcom-1st-floor-blahblah
+Main1 https://api.instatus.com/v1/integrations/runscope/exampledotcom-3rd-floor-blahblah
+EdgeSwitch2 https://api.instatus.com/v1/integrations/runscope/exampledotcom-2nd-floor-blahblah
