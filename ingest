@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euf
 
-grep -E 'has (dis)?connected (to|from) UNMS' | while read LINE; do
+grep -E 'has (dis)?connected (to|from) (UNMS|UISP)' | while read LINE; do
 	echo "$LINE" >> /tmp/unms2instatus.debug
 
 	BOX=$(echo "$LINE" | awk '{print $1}')
